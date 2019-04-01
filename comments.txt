@@ -1,0 +1,43 @@
+1) Classifying simple actions to judge how well a complex task is done. - N
+    > Come up with various classes of actions and rate them.
+1) Adding rotation as a action and incorporating it into action plan. - J
+    > Rotation is an action under the class 'motion'.
+    > It involves rotating at the location the robot currently is.
+    > The robot is able to rotate by itself and human beings can force the robot to rotate using arrows at the top.
+    > Model arrows as buttons.
+1) The robot is supposed to turn. - J
+    > See above.
+1) Making the robot aware of the level it is at/ what floor it got out. - J
+    > Add a 'z' coordinate to all appropriate positions. 
+    > Also add the 'z' coordinate to the elevator planar position.
+    > Use numbers.
+1) The robot must not move/lock when its drawers are open. - N/J
+    > Drawer has a state which determines whether it is open or not.
+1) Human beings should be able to summon the robot. - N
+    > The robot should have a queue of tasks. FIFO. 
+    > Robot should receive appropriate signals through its communication module.
+
+2) Merge the elevators into a single eleator for both humans and robots. - J
+    > The elevators have a maximum weight based capacity and the root uses obstacle detection 
+    to determine whether the elevator is full.
+2) Add obstacle detection. - J/N
+    > Monitoring. 
+    > If an obstacle is found, the robot finds an alternative path.
+    > Other alternatives such as not moving and communicating appropriate error message.
+    > If it is a movable obstacle check again.
+
+3) Leave the elevator incase of an emergency. - N
+    > See action below.
+3) Classify an emergency. - N
+    > Link it to the security level of the drawers.
+    > Emergency is determined with a special panic button. 
+    > Model the big red button.
+
+4) Leave the elevator only when it is at the right floor.
+    > Communicate with the elevator . If you are feeling fancy use computer vision.
+    > This action follows move elevator.
+4) Model the actions of the elevator as a queue of floors to access.
+    > The robot uses this to determine which elevator to take.
+
+* Extend the communication module. 
+* Smarter elevator choices and task decisions.

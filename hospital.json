@@ -1,0 +1,171 @@
+{
+    "@context": {
+        "schema": "https://json-ld.org/",
+        "MM": "../buildingmetamodel.json"
+    },
+    "@type": "https://wiki.openstreetmap.org/wiki/Buildings",
+    "@id": "Pallet Town Hospital",
+    "description": "A state of the art Hospital in Pallet Town which has adopted robot assistants",
+    "locations": {
+        "@type": "https://wiki.openstreetmap.org/wiki/Database",
+        "@id": "locations",
+        "@value": [
+            {
+                "@type": "MM:Room",
+                "@id": "0.01",
+                "level": 0,
+                "elevatorDistance": 10
+            },
+            {
+                "@type": "MM:Room",
+                "@id": "0.02",
+                "level": 0,
+                "elevatorDistance": -10
+            },
+            {
+                "@type": "MM:Room",
+                "@id": "0.03",
+                "level": 0,
+                "elevatorDistance": -30
+            },
+            {
+                "@type": "MM:Room",
+                "@id": "0.04",
+                "level": 0,
+                "elevatorDistance": 30
+            },
+            {
+                "@type": "MM:Room",
+                "@id": "1.01",
+                "level": 1,
+                "elevatorDistance": 10
+            },
+            {
+                "@type": "MM:Room",
+                "@id": "1.02",
+                "level": 1,
+                "elevatorDistance": -10
+            },
+            {
+                "@type": "MM:Room",
+                "@id": "2.01",
+                "level": 2,
+                "elevatorDistance": 10
+            },
+            {
+                "@type": "MM:Room",
+                "@id": "2.02",
+                "level": 2,
+                "elevatorDistance": 70
+            },
+            {
+                "@type": "MM:Corridor",
+                "@id": "Gnd Floor",
+                "level": 0
+            },
+            {
+                "@type": "MM:Corridor",
+                "@id": "1st Floor",
+                "level": 1
+            },
+            {
+                "@type": "MM:Corridor",
+                "@id": "2nd Floor",
+                "level": 2
+            },
+            {
+                "@type": "MM:Elevator",
+                "@id": "Human Elevator",
+                "description": "An elevator for human beings only. No robots allowed.",
+                "possibleActions": [
+                    {
+                        "@id": "Down",
+                        "numberFloors": "int"
+                    },
+                    {
+                        "@id": "Up",
+                        "numberFloors": "int"
+                    }
+                ],
+                "accessPosition": {
+                    "@type": "MM:Position",
+                    "@id": "Elevator_Planar_Postition",
+                    "description": "The position at which someone can wait for the elevator",
+                    "@value": {
+                        "x": "x",
+                        "y": "y"
+                    }
+                },
+                "inPosition": {
+                    "@type": "MM:Position",
+                    "@id": "Elevator_Planar_Postition",
+                    "description": "The position in the elevator",
+                    "@value": {
+                        "x": "x",
+                        "y": "y"
+                    }
+                }
+            },
+            {
+                "@type": "MM:Elevator",
+                "@id": "RobotElevator",
+                "description": "An elevator for human beings only. No robots allowed.",
+                "possibleActions": [
+                    {
+                        "@id": "Down",
+                        "numberFloors": "int"
+                    },
+                    {
+                        "@id": "Up",
+                        "numberFloors": "int"
+                    }
+                ],
+                "accessPosition": {
+                    "@type": "MM:Position",
+                    "@id": "Elevator_Planar_Postition",
+                    "description": "The position at which someone can wait for the elevator",
+                    "@value": {
+                        "x": "x",
+                        "y": "y"
+                    }
+                },
+                "inPosition": {
+                    "@type": "MM:Position",
+                    "@id": "Elevator_Planar_Postition",
+                    "description": "The position in the elevator",
+                    "@value": {
+                        "x": "x",
+                        "y": "y"
+                    }
+                }
+            }
+        ]
+    },
+    "biometrics": {
+        "@type": "https://wiki.openstreetmap.org/wiki/Database",
+        "@id": "nurseBiometrics",
+        "@value": [
+            {
+                "@type": "Human Being (grounded)",
+                "@id": "Nurse Joy",
+                "fingerprint": "<data>"
+            },
+            {
+                "@type": "Human Being (grounded)",
+                "@id": "Jane Foster",
+                "fingerprint": "<data>"
+            },
+            {
+                "@type": "Human Being (grounded)",
+                "@id": "Poppy Pomfrey",
+                "fingerprint": "<data>"
+            }
+        ]
+    },
+    "elevatorControl": {
+        "@type": "data (grounded)",
+        "@id": "Elevator_Status",
+        "current_position": "int",
+        "targetElevator": "RobotElevator"
+    }
+}

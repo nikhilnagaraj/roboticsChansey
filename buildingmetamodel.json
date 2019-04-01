@@ -1,0 +1,31 @@
+[
+    {
+        "@context": {
+            "schema": "http://schema.org/"
+        },
+        "@type": "Meta-Model",
+        "@id": "Room",
+        "required": [
+            "level",
+            "elevatorDistance"
+        ],
+        "constraints": [
+            "type(level) == int",
+            "type(elevatorDistance) == int"
+        ]
+    },
+    {
+        "@context": {
+            "schema": "http://schema.org/"
+        },
+        "@type": "Meta-Model",
+        "@id": "Elevator",
+        "required": [
+            "possibleActions","position"
+        ],
+        "constraints": [
+            "len(possibleActions) == 2"
+        ],
+        "_comments": "Many more constraints can be modelled."
+    }
+]

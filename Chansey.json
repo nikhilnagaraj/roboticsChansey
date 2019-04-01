@@ -1,0 +1,239 @@
+{
+    "@context": {
+        "schema": "https://json-ld.org/",
+        "MM": "../robotmetamodels.json",
+        "Hospital": "../hospital.json",
+    },
+    "@type": "https://www.iso.org/standard/53820.html",
+    "@id": "Chansey",
+    "description": "A simple robot to transport medicines/other sensitive payload in a hospital.",
+    "inspiredBy": [
+        "https://aethon.com/tug",
+        "WallE_GrabbingObject"
+    ],
+    "parts": [
+        {
+            "@id": "Drawer-001",
+            "@type": "MM:Drawer",
+            "parts": [
+                {
+                    "@id": "Lock-001",
+                    "@type": "MM:Access_Control_Structure",
+                    "locked": "true/false"
+                },
+                {
+                    "@id": "FP-Scanner-001",
+                    "@type": "MM:Biometric_Security_Feature",
+                    "designatedLock": "#Lock-001",
+                    "@value": {
+                        "@id": "User's Fingerprint",
+                        "fingerprint": " "
+                    },
+                    "check": "true/false"
+                }
+            ]
+        },
+        {
+            "@id": "Drawer-002",
+            "@type": "MM Drawer",
+            "parts": [
+                {
+                    "@id": "Lock-002",
+                    "@type": "MM:Access_Control_Structure",
+                    "locked": "true/false"
+                },
+                {
+                    "@id": "User-Keypad-001",
+                    "@type": "MM:Non_Biometric_Security_Feature",
+                    "designatedLock": "#Lock-002",
+                    "@value": [
+                        {
+                            "@id": "Entered Pin",
+                            "pin": " "
+                        },
+                        {
+                            "@id": "Actual Pin",
+                            "pin": "9999"
+                        }
+                    ],
+                    "check": "true/false"
+                }
+            ]
+        },
+        {
+            "@type": [
+                "MM:Network_Communication_Module",
+                "MM:Processing_Module"
+            ],
+            "@id": "Palpatine",
+            "description": " A network communication and processing module in Chansey that is connected to the building's network.",
+            "accessible_data": [
+                "Hospital:nurseBiometrics",
+                "Hospital:locations",
+                "Hospital:Elevator_Status"
+            ]
+        },
+        {
+            "@type": "MM:User_Input_Device",
+            "@id": "Destination_Selection_Keypad",
+            "description": "User selects the destination for the robot to go to."
+        },
+        {
+            "@type": "MM:Motion_Parts",
+            "@id": "Wheeled Base",
+            "description": "A wheeled base which moves the stack of drawers.",
+            "parts": [
+                {
+                    "@type": "MM:Basic_Mechanical_Parts",
+                    "@id": "Wheel1"
+                },
+                {
+                    "@type": "MM:Basic_Mechanical_Parts",
+                    "@id": "Wheel2"
+                },
+                {
+                    "@type": "MM:Basic_Mechanical_Parts",
+                    "@id": "Wheel3"
+                },
+                {
+                    "@type": "MM:Basic_Mechanical_Parts",
+                    "@id": "Wheel4"
+                },
+                {
+                    "@type": "MM:Motion_Controller",
+                    "@id": "Motion_Controller",
+                    "description": "It receives direction and distance from Palpatine and moves Chansey appropriately",
+                    "distance": "tbd",
+                    "direction": "xxxx"
+                }
+            ]
+        }
+    ],
+    "currentPosition": {
+        "@type": "MM:Position",
+        "@id": "Current-Position",
+        "@value": {
+            "@id": "Timestamp",
+            "x": "x",
+            "y": "y"
+        }
+    },
+    "deliveryLocation": {
+        "@type": [
+            "MM:Position",
+            "MM:Path"
+        ],
+        "@id": "Delivery_Location",
+        "@value": [
+            {
+                "@id": "AbsoluteDeliveryLocation",
+                "x": "x",
+                "y": "y"
+            },
+            {
+                "@id": "Steps",
+                "heightDifference": " +/- n where n is the number of floors to move up/down.",
+                "toElevator": " +/- n where n is the number of meters to move to the left or right to reach the elevator",
+                "fromElevator": " +/- n where n is the number of meters to move to the left or right to reach the destination from the elevator",
+                "intoElevator": 2,
+                "sameFloorDistance": "+/- n where n is the distance of the destination to the left/right on the same floor"
+            }
+        ]
+    },
+    "possibleActions": [
+        {
+            "@type": "MM:Unlock_Drawer",
+            "@id": "Unlock Drawer-001",
+            "description": "Unlocks Drawer-001",
+            "targetDrawer": {
+                "@id": "Drawer-001"
+            }
+        },
+        {
+            "@type": "MM:Unlock_Drawer",
+            "@id": "Unlock Drawer-002",
+            "description": "Unlocks Drawer-002",
+            "targetDrawer": {
+                "@id": "Drawer-002"
+            }
+        },
+        {
+            "@type": "MM:Elevator_Communication",
+            "@id": "Request Elevator",
+            "description": "Requests the elevator to its floor",
+            "targetElevator": {
+                "@id": "Hospital:RobotElevator"
+            }
+        },
+        {
+            "@type": "MM:Elevator_Communication",
+            "@id": "Move Elevator",
+            "description": "Requests the elevator to move to the required floor",
+            "targetElevator": {
+                "@id": "Hospital:RobotElevator"
+            },
+            "numFloorstoMove": "int"
+        },
+        {
+            "@type": "MM:Motion",
+            "@id": "Move",
+            "distance": "tbd"
+        }
+    ],
+    "builtinGoal": {
+        "@id": "Chansey move goal",
+        "@type": "MM:Goal",
+        "description": "Move to desired room",
+        "desired result": {
+            "condition": "Chansey.Current-Position == Delivery-Location.AbsoluteDeliveryLocation"
+        },
+        "action plan": {
+            "@id": "Plan Selector"
+        }
+    },
+    "planSelector": {
+        "@id": "Plan Selector",
+        "@type": "MM:ActionPlanSelector",
+        "condition": "Delivery-Location.Steps.sameFloorDistance == 0",
+        "satisfiedActionPlan": {
+            "@id": "Chansey simple action plan"
+        },
+        "falsifiedActionPlan": {
+            "@id": "Chansey action plan"
+        }
+    },
+    "chanseySimpleActionPlan": {
+        "@id": "Chansey simple action plan",
+        "@type": "MM:ActionPlan",
+        "actionPlan": [
+            {
+                "@id": "Move(distance = Delivery_Location.Steps.sameFloorDistance"
+            }
+        ],
+        "currentAction": "tbd"
+    },
+    "chanseyActionPlan": {
+        "@id": "Chansey action plan",
+        "@type": "MM:ActionPlan",
+        "actionPlan": [
+            {
+                "@id": "Move(distance = Delivery_Location.Steps.toElevator)"
+            },
+            {
+                "@id": "Request Elevator"
+            },
+            {
+                "@id": "Move(distance = Delivery_Location.Steps.intoElevator)"
+            },
+            {
+                "@id": "Move Elevator(numFloorstoMove = heightDifference)"
+            },
+            {
+                "@id": "Move(distance = Delivery_Location.Steps.fromElevator)"
+            }
+        ],
+        "currentAction": "tbd"
+    }
+}
+
+

@@ -1,0 +1,223 @@
+{
+    "@context": {
+        "schema": "http://schema.org/"
+    },
+    "@id": "RobotMetaModels",
+    "@graph": [
+        {
+            "@id": "StructureMetaModels",
+            "@graph": [
+                {
+                    "@id": "Drawer",
+                    "description": "A structure that is used for storage and is access controlled.",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": [
+                        "parts.contains(Access_Control_Structure) && parts.contains(User_Input_device)"
+                    ]
+                },
+                {
+                    "@id": "Access_Control_Structure",
+                    "description": "A structure that controls access to a particular storage structure.",
+                    "locked": "bool",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": [
+                        "locked == true || locked == false"
+                    ]
+                },
+                {
+                    "@id": "User_Input_Device",
+                    "description": "A structure that allows the user to provide input",
+                    "subclass": [
+                        {
+                            "@id": "Biometric_Security_Feature"
+                        },
+                        {
+                            "@id": "Non_Biometric_Security_Feature"
+                        }
+                    ],
+                    "superclass": [],
+                    "required": []
+                },
+                {
+                    "@id": "Biometric_Security_Feature",
+                    "description": "A user input device which provides access based on biometric input.",
+                    "@value": {
+                        "@id": "User's Fingerprint",
+                        "fingerprint": "<data>"
+                    },
+                    "subclass": [],
+                    "superclass": [
+                        {
+                            "@id": "User_Input_Device"
+                        }
+                    ],
+                    "required": [
+                        "designatedLock",
+                        "User's Fingerprint",
+                        "check"
+                    ]
+                },
+                {
+                    "@id": "Non_Biometric_Security_Feature",
+                    "description": "A structure that provides access based on non biometric values",
+                    "subclass": [],
+                    "superclass": [
+                        {
+                            "@id": "User_Input_Device"
+                        }
+                    ],
+                    "required": [
+                        "designatedLock",
+                        "Actual Pin",
+                        "Entered Pin",
+                        "check"
+                    ]
+                },
+                {
+                    "@id": "Network_Communication_Module",
+                    "description": "A structure that communicates with the network",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": [
+                        "accessible_data"
+                    ]
+                },
+                {
+                    "@id": "Processing_Module",
+                    "description": "A module capable of processing and transferring data to different parts of the robot",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": []
+                },
+                {
+                    "@id": "Motion_Parts",
+                    "description": "Parts required to move",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": []
+                },
+                {
+                    "@id": "Basic_Mechanical_Parts",
+                    "description": "Parts that form the core of the mechanial abilitys of the robot (Motors, Wheels, Levers etc.)",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": []
+                },
+                {
+                    "@id": "Motion_Controller",
+                    "description": "This module controls the real-time mechanical motion in the robot",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": [
+                        "direction",
+                        "distance"
+                    ]
+                }
+            ]
+        },
+        {
+            "@id": "ValueMetaModels",
+            "@graph": [
+                {
+                    "@id": "Position",
+                    "description": "The position of the object / robot of interest",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": [
+                        "@value[0].contains(x) && @value[0].contains(y)"
+                    ]
+                },
+                {
+                    "@id": "Path",
+                    "description": "The path that needs to be taken to reach the destination",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": [
+                        "@value[1].contains(heightDifference) && @value[1].contains(toElevator) && @value[1].contains(fromElevator) && @value[1].contains(intoElevator)"
+                    ]
+                }
+            ]
+        },
+        {
+            "@id": "ActionMetaModels",
+            "@graph": [
+                {
+                    "@id": "Unlock_Drawer",
+                    "description": "Unlocks the target drawer",
+                    "precondition": "targetDrawer().parts().check() == true && targetDrawer().parts().locked() == true",
+                    "postcondition": "targetDrawer().parts().check() == false && targetDrawer().parts().locked() == false"
+                },
+                {
+                    "@id": "Elevator_Communication",
+                    "description": "Communicates with the elevator through the network. The network responds only once the requested task has been successfully completed by the elevator.",
+                    "agent": "r",
+                    "elevator": "e",
+                    "precondition": [
+                        {
+                            "condition": "r.Current-Postition == e.accessPosition || r.Current-Position == e.inPosition "
+                        },
+                        {
+                            "condition": "r.has-a(Network_Communication_Module)"
+                        }
+                    ],
+                    "postcondition": "r.Current-Position == e.inPosition || r.Current-Position.y == Delivery_Location.value.y"
+                },
+                {
+                    "@id": "Motion",
+                    "description": "The robot moves.",
+                    "agent": "r",
+                    "precondition": [
+                        {
+                            "condition": "r.has-a(motion_Parts)"
+                        },
+                        {
+                            "condition": "r.has-a(motion_Controller)"
+                        },
+                        {
+                            "condition": "r.Motion.distance != 0 "
+                        }
+                    ],
+                    "postcondition": "r.Motion.distance == 0"
+                }
+            ]
+        },
+        {
+            "@id": "GoalAction Meta Models",
+            "@graph": [
+                {
+                    "@id": "Goal",
+                    "description": "description",
+                    "desired result": "result",
+                    "action plan": "plan",
+                    "required": [
+                        "descr",
+                        "res",
+                        "tp"
+                    ]
+                },
+                {
+                    "@id": "ActionPlanSelector",
+                    "description": "Select a plan based on a condition",
+                    "condition": "cndn",
+                    "satisfiedActionPlan": "plan",
+                    "falsifiedActionPlan": "plan2",
+                    "required": [
+                        "cndn",
+                        "plan",
+                        "plan2"
+                    ]
+                },
+                {
+                    "@id": "ActionPlan",
+                    "description": " A plan of actions to follow",
+                    "action plan": "plan",
+                    "required": [
+                        "plan"
+                    ]
+                }
+            ]
+        }
+    ]
+}
