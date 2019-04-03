@@ -2,7 +2,7 @@
     "@context": {
         "schema": "https://json-ld.org/",
         "MM": "../robotmetamodels.json",
-        "Hospital": "../hospital.json",
+        "Hospital": "../hospital.json"
     },
     "@type": "https://www.iso.org/standard/53820.html",
     "@id": "Chansey",
@@ -102,11 +102,29 @@
                 {
                     "@type": "MM:Motion_Controller",
                     "@id": "Motion_Controller",
-                    "description": "It receives direction and distance from Palpatine and moves Chansey appropriately",
+                    "description": "It receives direction, distance and orientation from Palpatine and moves Chansey appropriately",
                     "distance": "tbd",
-                    "direction": "xxxx"
+                    "direction": "xxxx",
+                    "orientation": "o"
                 }
             ]
+        },
+        {
+            "@type": "MM:Button",
+            "@id": "Rotate Left Button",
+            "description": "Makes the robot rotate 90 degrees to the left.",
+            "action": "Rotate(distance = -90)"
+        },
+        {
+            "@type": "MM:Button",
+            "@id": "Rotate Right Button",
+            "description": "Makes the robot rotate 90 degrees to the right.",
+            "action": "Rotate(distance = 90)"
+        },        {
+            "@type": "MM:Button",
+            "@id": "Rotate Back Button",
+            "description": "Makes the robot rotate 180 degrees.",
+            "action": "Rotate(distance = 180)"
         }
     ],
     "currentPosition": {
@@ -115,7 +133,9 @@
         "@value": {
             "@id": "Timestamp",
             "x": "x",
-            "y": "y"
+            "y": "y",
+            "z": "z",
+            "o": "o"
         }
     },
     "deliveryLocation": {
@@ -128,7 +148,9 @@
             {
                 "@id": "AbsoluteDeliveryLocation",
                 "x": "x",
-                "y": "y"
+                "y": "y",
+                "z": "z",
+                "o": "o"
             },
             {
                 "@id": "Steps",
@@ -177,6 +199,11 @@
         {
             "@type": "MM:Motion",
             "@id": "Move",
+            "distance": "tbd"
+        },
+        {
+            "@type": "MM:Motion",
+            "@id": "Rotate",
             "distance": "tbd"
         }
     ],
@@ -227,6 +254,9 @@
             },
             {
                 "@id": "Move Elevator(numFloorstoMove = heightDifference)"
+            },
+            {
+                "@id": "Rotate(distance = 180)"
             },
             {
                 "@id": "Move(distance = Delivery_Location.Steps.fromElevator)"

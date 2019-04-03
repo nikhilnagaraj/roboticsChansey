@@ -112,7 +112,17 @@
                     "superclass": [],
                     "required": [
                         "direction",
-                        "distance"
+                        "distance",
+                        "orientation"
+                    ]
+                },
+                {
+                    "@id": "Button",
+                    "description": "A physical button on the robot that initiates a predefined action",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": [
+                        "action"
                     ]
                 }
             ]
@@ -126,7 +136,7 @@
                     "subclass": [],
                     "superclass": [],
                     "required": [
-                        "@value[0].contains(x) && @value[0].contains(y)"
+                        "@value[0].contains(x) && @value[0].contains(y) && @value[0].contains(z) && @value[0].contains(o)"
                     ]
                 },
                 {
