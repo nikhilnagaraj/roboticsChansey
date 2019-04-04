@@ -147,6 +147,14 @@
                     "required": [
                         "@value[1].contains(heightDifference) && @value[1].contains(toElevator) && @value[1].contains(fromElevator) && @value[1].contains(intoElevator)"
                     ]
+                },
+                {
+                    "@id": "Task",
+                    "description": "This is what the robot has to do.",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": "taskId.isnotEmpty() && taskDescription.isnotEmpty()"
+                    
                 }
             ]
         },
@@ -157,11 +165,12 @@
                     "@id": "Unlock_Drawer",
                     "description": "Unlocks the target drawer",
                     "precondition": "targetDrawer().parts().check() == true && targetDrawer().parts().locked() == true",
-                    "postcondition": "targetDrawer().parts().check() == false && targetDrawer().parts().locked() == false"
+                    "postcondition": "targetDrawer().parts().check() == false && targetDrawer().parts().locked() == false",
+                    "score": 2
                 },
                 {
                     "@id": "Elevator_Communication",
-                    "description": "Communicates with the elevator through the network. The network responds only once the requested task has been successfully completed by the elevator.",
+                    "description": "Communicates with the elevator through the network. Response is recived only when the requested task has been successfully completed by the elevator.",
                     "agent": "r",
                     "elevator": "e",
                     "precondition": [
@@ -172,7 +181,13 @@
                             "condition": "r.has-a(Network_Communication_Module)"
                         }
                     ],
-                    "postcondition": "r.Current-Position == e.inPosition || r.Current-Position.y == Delivery_Location.value.y"
+                    "postcondition": "r.Current-Position == e.inPosition || r.Current-Position.y == Delivery_Location.value.y",
+                    "score": 4
+                },
+                {
+                    "@id": "Task_Communication",
+                    "description": "Communicate with the network to obtain tasks/update task status. This being a monitoring task has no score.",
+                    "agent": "r"
                 },
                 {
                     "@id": "Motion",
@@ -186,10 +201,11 @@
                             "condition": "r.has-a(motion_Controller)"
                         },
                         {
-                            "condition": "r.Motion.distance != 0 "
+                            "condition": "r.Motion.distance != 0 || r.Motion.angle != 0 "
                         }
                     ],
-                    "postcondition": "r.Motion.distance == 0"
+                    "postcondition": "r.Motion.distance == 0 && r.Motion.angle == 0",
+                    "score": 8
                 }
             ]
         },
