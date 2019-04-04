@@ -167,5 +167,11 @@
         "@id": "Elevator_Status",
         "current_position": "int",
         "targetElevator": "RobotElevator"
+    },
+    "taskQ": {
+        "@type": "https://cloud.google.com/appengine/docs/standard/python/taskqueue/",
+        "@id": "TaskQueue",
+        "tasks": ["<task1>", "<task2>", "..."]
     }
+
 }
