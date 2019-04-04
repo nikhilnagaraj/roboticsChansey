@@ -70,7 +70,8 @@
             "accessible_data": [
                 "Hospital:nurseBiometrics",
                 "Hospital:locations",
-                "Hospital:Elevator_Status"
+                "Hospital:Elevator_Status",
+                "Hospital:TaskQueue"
             ]
         },
         {
@@ -127,6 +128,17 @@
             "action": "Rotate(distance = 180)"
         }
     ],
+    "currentTask": {
+        "@type": "MM:Task",
+        "@id": "Current-Task",
+        "taskId": "tbd",
+        "taskdescription": [
+            "Location: <tbd>",
+            "HumanDescription: <tbd>",
+            "Misc: <tbd>"
+        ]
+            
+    },
     "currentPosition": {
         "@type": "MM:Position",
         "@id": "Current-Position",
@@ -162,7 +174,7 @@
             }
         ]
     },
-    "possibleActions": [
+    "possibleVoluntaryActions": [
         {
             "@type": "MM:Unlock_Drawer",
             "@id": "Unlock Drawer-001",
@@ -197,6 +209,11 @@
             "numFloorstoMove": "int"
         },
         {
+            "@type": "MM:Task_Communication",
+            "@id": "Send Task Status",
+            "description": "Sends the status of a task. If completed, sends a success indicator. Else sends the step at which it failed and the complete action plan.",
+        },
+        {
             "@type": "MM:Motion",
             "@id": "Move",
             "distance": "tbd"
@@ -204,8 +221,26 @@
         {
             "@type": "MM:Motion",
             "@id": "Rotate",
-            "distance": "tbd"
+            "angle": "tbd"
         }
+    ],
+    "routineInvoluntaryActions": [
+        
+        {
+            "@type": "MM:Task_Communication",
+            "@id": "Check Task Queue",
+            "description": "Checks the global task queue for pending tasks. The network responds with the task at the head of the queue or None.",
+            "targetProperty": "Current-Task" 
+             
+        },
+        {
+            "@type": "CheckTask (grounded)",
+            "@id": "Check pending robot task",
+            "description": "Checks if this root has accepted a task from the Queue",
+            "checks": "Current-Task.taskId() != None",
+            "satisfiedAction": "set(Delivery-Location.AbsoluteDeliveryLocation = Current-Task.taskDescription.Location) && evaluate(Chansey move goal)"
+        }  
+    
     ],
     "builtinGoal": {
         "@id": "Chansey move goal",
@@ -244,22 +279,34 @@
         "@type": "MM:ActionPlan",
         "actionPlan": [
             {
-                "@id": "Move(distance = Delivery_Location.Steps.toElevator)"
+                "@id": "Move(distance = Delivery_Location.Steps.toElevator)",
+                "success": "goto(next)",
+                "fail": "Send Task Status"
             },
             {
-                "@id": "Request Elevator"
+                "@id": "Request Elevator",
+                "success": "goto(next)",
+                "fail": "Send Task Status"
             },
             {
-                "@id": "Move(distance = Delivery_Location.Steps.intoElevator)"
+                "@id": "Move(distance = Delivery_Location.Steps.intoElevator)",
+                "success": "goto(next)",
+                "fail": "Send Task Status"
             },
             {
-                "@id": "Move Elevator(numFloorstoMove = heightDifference)"
+                "@id": "Move Elevator(numFloorstoMove = heightDifference)",
+                "success": "goto(next)",
+                "fail": "Send Task Status"
             },
             {
-                "@id": "Rotate(distance = 180)"
+                "@id": "Rotate(angle = 180)",
+                "success": "goto(next)",
+                "fail": "Send Task Status"
             },
             {
-                "@id": "Move(distance = Delivery_Location.Steps.fromElevator)"
+                "@id": "Move(distance = Delivery_Location.Steps.fromElevator)",
+                "success": "Send Task Status",
+                "fail": "Send Task Status"
             }
         ],
         "currentAction": "tbd"
