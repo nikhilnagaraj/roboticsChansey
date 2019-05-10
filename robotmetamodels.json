@@ -140,6 +140,15 @@
                     ]
                 },
                 {
+                    "@id": "Planar_Position",
+                    "description": "The planar position of the object / robot of interest",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": [
+                        "@value[0].contains(x) && @value[0].contains(y)"
+                    ] 
+                },
+                {
                     "@id": "Path",
                     "description": "The path that needs to be taken to reach the destination",
                     "subclass": [],

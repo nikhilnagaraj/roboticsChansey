@@ -211,7 +211,7 @@
         {
             "@type": "MM:Task_Communication",
             "@id": "Send Task Status",
-            "description": "Sends the status of a task. If completed, sends a success indicator. Else sends the step at which it failed and the complete action plan.",
+            "description": "Sends the status of a task. If completed, sends a success indicator. Else sends the step at which it failed and the complete action plan."
         },
         {
             "@type": "MM:Motion",

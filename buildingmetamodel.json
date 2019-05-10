@@ -7,11 +7,10 @@
         "@id": "Room",
         "required": [
             "level",
-            "elevatorDistance"
+            "position"
         ],
         "constraints": [
-            "type(level) == int",
-            "type(elevatorDistance) == int"
+            "type(level) == int"
         ]
     },
     {
@@ -21,7 +20,8 @@
         "@type": "Meta-Model",
         "@id": "Elevator",
         "required": [
-            "possibleActions","position"
+            "possibleActions",
+            "position"
         ],
         "constraints": [
             "len(possibleActions) == 2"

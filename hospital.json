@@ -14,49 +14,97 @@
                 "@type": "MM:Room",
                 "@id": "0.01",
                 "level": 0,
-                "elevatorDistance": 10
+                "position": {
+                    "@type": "MM:Planar_Position",
+                    "@value": {
+                        "x": 10,
+                        "y": 10
+                    }
+                }
             },
             {
                 "@type": "MM:Room",
                 "@id": "0.02",
                 "level": 0,
-                "elevatorDistance": -10
+                "position": {
+                    "@type": "MM:Planar_Position",
+                    "@value": {
+                        "x": 10,
+                        "y": -10
+                    }
+                }
             },
             {
                 "@type": "MM:Room",
                 "@id": "0.03",
                 "level": 0,
-                "elevatorDistance": -30
+                "position": {
+                    "@type": "MM:Planar_Position",
+                    "@value": {
+                        "x": 30,
+                        "y": 10
+                    }
+                }
             },
             {
                 "@type": "MM:Room",
                 "@id": "0.04",
                 "level": 0,
-                "elevatorDistance": 30
+                "position": {
+                    "@type": "MM:Planar_Position",
+                    "@value": {
+                        "x": 30,
+                        "y": -10
+                    }
+                }
             },
             {
                 "@type": "MM:Room",
                 "@id": "1.01",
                 "level": 1,
-                "elevatorDistance": 10
+                "position": {
+                    "@type": "MM:Planar_Position",
+                    "@value": {
+                        "x": 10,
+                        "y": 10
+                    }
+                }
             },
             {
                 "@type": "MM:Room",
                 "@id": "1.02",
                 "level": 1,
-                "elevatorDistance": -10
+                "position": {
+                    "@type": "MM:Planar_Position",
+                    "@value": {
+                        "x": 10,
+                        "y": -10
+                    }
+                }
             },
             {
                 "@type": "MM:Room",
                 "@id": "2.01",
                 "level": 2,
-                "elevatorDistance": 10
+                "position": {
+                    "@type": "MM:Planar_Position",
+                    "@value": {
+                        "x": 10,
+                        "y": 10
+                    }
+                }
             },
             {
                 "@type": "MM:Room",
                 "@id": "2.02",
                 "level": 2,
-                "elevatorDistance": 70
+                "position": {
+                    "@type": "MM:Planar_Position",
+                    "@value": {
+                        "x": 70,
+                        "y": 10
+                    }
+                }
             },
             {
                 "@type": "MM:Corridor",
@@ -88,8 +136,8 @@
                     }
                 ],
                 "accessPosition": {
-                    "@type": "MM:Position",
-                    "@id": "Elevator_Planar_Postition",
+                    "@type": "MM:Planar_Position",
+                    "@id": "Human_Elevator_Access_Position",
                     "description": "The position at which someone can wait for the elevator",
                     "@value": {
                         "x": "x",
@@ -97,8 +145,8 @@
                     }
                 },
                 "inPosition": {
-                    "@type": "MM:Position",
-                    "@id": "Elevator_Planar_Postition",
+                    "@type": "MM:Planar_Position",
+                    "@id": "Human_Elevator_In_Position",
                     "description": "The position in the elevator",
                     "@value": {
                         "x": "x",
@@ -109,7 +157,7 @@
             {
                 "@type": "MM:Elevator",
                 "@id": "RobotElevator",
-                "description": "An elevator for human beings only. No robots allowed.",
+                "description": "An elevator for robots only. No humans allowed.",
                 "possibleActions": [
                     {
                         "@id": "Down",
@@ -121,8 +169,8 @@
                     }
                 ],
                 "accessPosition": {
-                    "@type": "MM:Position",
-                    "@id": "Elevator_Planar_Postition",
+                    "@type": "MM:Planar_Position",
+                    "@id": "Robot_Elevator_Access_Position",
                     "description": "The position at which someone can wait for the elevator",
                     "@value": {
                         "x": "x",
@@ -130,8 +178,8 @@
                     }
                 },
                 "inPosition": {
-                    "@type": "MM:Position",
-                    "@id": "Elevator_Planar_Postition",
+                    "@type": "MM:Planar_Position",
+                    "@id": "Robot_Elevator_In_Position",
                     "description": "The position in the elevator",
                     "@value": {
                         "x": "x",
