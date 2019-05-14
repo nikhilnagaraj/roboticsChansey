@@ -4,8 +4,8 @@ This needs to be changed.
     I suggest we remove the absolute position of the delivery location and just give the id of the room to which the robot should go
 DONE The 'elevatorDistance' attribute needs to be deleted.
     see above
-* Camera (1, 360*) with perception software needs to be added to the robot.
+WORKING ON THIS  -> * Camera (1, 360*) with perception software needs to be added to the robot.
 * Location software grounding (centrally) to create a plan to move.
-* Software to count doors. Recognize doors. Ground door.
+WORKING ON THIS  -> * Software to count doors. Recognize doors. Ground door.
 * Movement plan instead of grid based movement system.
 * Change task evaluation method - Scores/actions need to be changed.
