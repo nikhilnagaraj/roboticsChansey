@@ -92,6 +92,13 @@
                     "required": []
                 },
                 {
+                    "@id": "Sensory_Device",
+                    "description": "A device capable of capturing environment data.",
+                    "subclass": [],
+                    "superclass": [],
+                    "required": [ "if x is sensory_device: x.hasa(dataProcessingModule)"]
+                },
+                {
                     "@id": "Motion_Parts",
                     "description": "Parts required to move",
                     "subclass": [],

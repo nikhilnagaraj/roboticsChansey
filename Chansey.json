@@ -75,6 +75,17 @@
             ]
         },
         {
+            "@type": "MM:Sensory_Device",
+            "@id": "Camera360",
+            "description": "A 360* camera mounted on the top the robot allowing it to sense the world.",
+            "dataProcessingModule": "VisionModule"
+        },
+        {
+            "@type": "https://ai.facebook.com/tools/",
+            "@id": "VisionModule",
+            "description": "A module to process andrecognise required objects from the data obtained using a camera."
+        },
+        {
             "@type": "MM:User_Input_Device",
             "@id": "Destination_Selection_Keypad",
             "description": "User selects the destination for the robot to go to."
