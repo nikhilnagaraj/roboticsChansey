@@ -2,10 +2,17 @@
 This needs to be changed.
     I have created a value: Planar_Position, and have given this to rooms and elevators in hospital
     I suggest we remove the absolute position of the delivery location and just give the id of the room to which the robot should go
+        I AGREE. We should remove the absolute position fo the delivery location.
 DONE The 'elevatorDistance' attribute needs to be deleted.
     see above
-WORKING ON THIS  -> * Camera (1, 360*) with perception software needs to be added to the robot.
-* Location software grounding (centrally) to create a plan to move.
-WORKING ON THIS  -> * Software to count doors. Recognize doors. Ground door.
+DONE * Camera (1, 360*) with perception software needs to be added to the robot.
+    I have added a camera and a perception module for this.
+DONE * Software to count doors. Recognize doors. Ground door.
+    Door has been grounded in building meta models
+    The perception module can recognize doors.
+    The perception module stores the world model it recognizes and the processing module process this 
+    to obtain relevant data, in this case the number of doors.
+
+* Location software grounding (centrally) to create a plan to move.   
 * Movement plan instead of grid based movement system.
 * Change task evaluation method - Scores/actions need to be changed.

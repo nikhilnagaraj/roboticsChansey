@@ -2,7 +2,8 @@
     "@context": {
         "schema": "https://json-ld.org/",
         "MM": "../robotmetamodels.json",
-        "Hospital": "../hospital.json"
+        "Hospital": "../hospital.json",
+        "BMM": "../buildingmetamodel.json"
     },
     "@type": "https://www.iso.org/standard/53820.html",
     "@id": "Chansey",
@@ -66,12 +67,13 @@
                 "MM:Processing_Module"
             ],
             "@id": "Palpatine",
-            "description": " A network communication and processing module in Chansey that is connected to the building's network.",
+            "description": " A network communication and processing module in Chansey that is connected to internal sensors and to the building's network.",
             "accessible_data": [
                 "Hospital:nurseBiometrics",
                 "Hospital:locations",
                 "Hospital:Elevator_Status",
-                "Hospital:TaskQueue"
+                "Hospital:TaskQueue",
+                "VisionModule:dataStore"
             ]
         },
         {
@@ -83,7 +85,14 @@
         {
             "@type": "https://ai.facebook.com/tools/",
             "@id": "VisionModule",
-            "description": "A module to process andrecognise required objects from the data obtained using a camera."
+            "description": "A module to process and recognise required objects from the data obtained using a camera.",
+            "recognise": ["BMM:Door"],
+            "dataStore": {
+                "@type": "https://www.sciencedirect.com/science/article/pii/S0004370216300790?via%3Dihub : SPARK",
+                "id": "VisualWorldModel",
+                "description": "Stores the world model as sensd by the camera and processsed byt he vision module."
+
+            }
         },
         {
             "@type": "MM:User_Input_Device",

@@ -17,6 +17,15 @@
         "@context": {
             "schema": "http://schema.org/"
         },
+        "@type": "https://en.wikipedia.org/wiki/Door",
+        "@id": "Door",
+        "required": [],
+        "constraints": []
+    },
+    {
+        "@context": {
+            "schema": "http://schema.org/"
+        },
         "@type": "Meta-Model",
         "@id": "Elevator",
         "required": [
