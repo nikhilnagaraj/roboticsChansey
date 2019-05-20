@@ -107,7 +107,7 @@
                 },
                 {
                     "@id": "Basic_Mechanical_Parts",
-                    "description": "Parts that form the core of the mechanial abilitys of the robot (Motors, Wheels, Levers etc.)",
+                    "description": "Parts that form the core of the mechanical abilities of the robot (Motors, Wheels, Levers etc.)",
                     "subclass": [],
                     "superclass": [],
                     "required": []
@@ -191,13 +191,13 @@
                     "elevator": "e",
                     "precondition": [
                         {
-                            "condition": "r.Current-Postition == e.accessPosition || r.Current-Position == e.inPosition "
+                            "condition": "r.Current_Postition == e.accessPosition || r.Current_Position == e.inPosition "
                         },
                         {
                             "condition": "r.has-a(Network_Communication_Module)"
                         }
                     ],
-                    "postcondition": "r.Current-Position == e.inPosition || r.Current-Position.y == Delivery_Location.value.y",
+                    "postcondition": "r.Current_Position == e.inPosition || r.Current_Position.y == Delivery_Location.value.y",
                     "score": 4
                 },
                 {

@@ -1,4 +1,4 @@
-* The rooms in the hospital do not have (x,y,z) location coordinates. But this is mentioned in the delivery locaiton for the robot.
+DONE * The rooms in the hospital do not have (x,y,z) location coordinates. But this is mentioned in the delivery locaiton for the robot.
 This needs to be changed.
     I have created a value: Planar_Position, and have given this to rooms and elevators in hospital
     I suggest we remove the absolute position of the delivery location and just give the id of the room to which the robot should go
@@ -13,6 +13,13 @@ DONE * Software to count doors. Recognize doors. Ground door.
     The perception module stores the world model it recognizes and the processing module process this 
     to obtain relevant data, in this case the number of doors.
 
-* Location software grounding (centrally) to create a plan to move.   
-* Movement plan instead of grid based movement system.
+DONE * Location software grounding (centrally) to create a plan to move.   
+    positioning module added (grounded)
+DONE * Movement plan instead of grid based movement system.
+    IndoorNavigationModule added (grounded)
+    adapted simpleActionplan to contain a number of steps to move and rotate to get to a target position on the current floor
+    adapted ActionPlan so that reaching the elevator now uses a simpleActionplan
+    using door recognition to derive the robots' position didn't seem so useful, 
+        but it could still be used when entering/leaving elevators and rooms and or reporting failure (if a door is closed or something)
+
 * Change task evaluation method - Scores/actions need to be changed.

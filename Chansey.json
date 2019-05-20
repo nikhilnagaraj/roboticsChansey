@@ -1,6 +1,6 @@
 {
     "@context": {
-        "schema": "https://json-ld.org/",
+        "schema": "https://json_ld.org/",
         "MM": "../robotmetamodels.json",
         "Hospital": "../hospital.json",
         "BMM": "../buildingmetamodel.json"
@@ -14,18 +14,18 @@
     ],
     "parts": [
         {
-            "@id": "Drawer-001",
+            "@id": "Drawer_001",
             "@type": "MM:Drawer",
             "parts": [
                 {
-                    "@id": "Lock-001",
+                    "@id": "Lock_001",
                     "@type": "MM:Access_Control_Structure",
                     "locked": "true/false"
                 },
                 {
-                    "@id": "FP-Scanner-001",
+                    "@id": "FP_Scanner_001",
                     "@type": "MM:Biometric_Security_Feature",
-                    "designatedLock": "#Lock-001",
+                    "designatedLock": "#Lock_001",
                     "@value": {
                         "@id": "User's Fingerprint",
                         "fingerprint": " "
@@ -35,18 +35,18 @@
             ]
         },
         {
-            "@id": "Drawer-002",
+            "@id": "Drawer_002",
             "@type": "MM Drawer",
             "parts": [
                 {
-                    "@id": "Lock-002",
+                    "@id": "Lock_002",
                     "@type": "MM:Access_Control_Structure",
                     "locked": "true/false"
                 },
                 {
-                    "@id": "User-Keypad-001",
+                    "@id": "User_Keypad_001",
                     "@type": "MM:Non_Biometric_Security_Feature",
-                    "designatedLock": "#Lock-002",
+                    "designatedLock": "#Lock_002",
                     "@value": [
                         {
                             "@id": "Entered Pin",
@@ -90,9 +90,19 @@
             "dataStore": {
                 "@type": "https://www.sciencedirect.com/science/article/pii/S0004370216300790?via%3Dihub : SPARK",
                 "id": "VisualWorldModel",
-                "description": "Stores the world model as sensd by the camera and processsed byt he vision module."
+                "description": "Stores the world model as sensed by the camera and processsed by the vision module."
 
             }
+        },
+        {
+            "@type": "https://www.dragonflycv.com/",
+            "@id": "PositioningModule",
+            "description": "A module to derive the position of the robot in a building using the onboard camera and a reference map of this building."
+        },
+        {
+            "@type": "https://www.mazemap.com/indoor-wayfinding",
+            "@id": "IndoorNavigationModule",
+            "description": "A module that calculates a simple action plan of move- and rotate-steps a robot needs to make in order to move from position A to destination B given a reference map of the current floor the robot is on."
         },
         {
             "@type": "MM:User_Input_Device",
@@ -150,7 +160,7 @@
     ],
     "currentTask": {
         "@type": "MM:Task",
-        "@id": "Current-Task",
+        "@id": "Current_Task",
         "taskId": "tbd",
         "taskdescription": [
             "Location: <tbd>",
@@ -161,7 +171,7 @@
     },
     "currentPosition": {
         "@type": "MM:Position",
-        "@id": "Current-Position",
+        "@id": "Current_Position",
         "@value": {
             "@id": "Timestamp",
             "x": "x",
@@ -172,17 +182,15 @@
     },
     "deliveryLocation": {
         "@type": [
-            "MM:Position",
+            "MM:Room",
             "MM:Path"
         ],
         "@id": "Delivery_Location",
         "@value": [
             {
-                "@id": "AbsoluteDeliveryLocation",
-                "x": "x",
-                "y": "y",
-                "z": "z",
-                "o": "o"
+                "@id": "TargetRoom",
+                "level": "l",
+                "position": "p"
             },
             {
                 "@id": "Steps",
@@ -197,18 +205,18 @@
     "possibleVoluntaryActions": [
         {
             "@type": "MM:Unlock_Drawer",
-            "@id": "Unlock Drawer-001",
-            "description": "Unlocks Drawer-001",
+            "@id": "Unlock Drawer_001",
+            "description": "Unlocks Drawer_001",
             "targetDrawer": {
-                "@id": "Drawer-001"
+                "@id": "Drawer_001"
             }
         },
         {
             "@type": "MM:Unlock_Drawer",
-            "@id": "Unlock Drawer-002",
-            "description": "Unlocks Drawer-002",
+            "@id": "Unlock Drawer_002",
+            "description": "Unlocks Drawer_002",
             "targetDrawer": {
-                "@id": "Drawer-002"
+                "@id": "Drawer_002"
             }
         },
         {
@@ -250,15 +258,15 @@
             "@type": "MM:Task_Communication",
             "@id": "Check Task Queue",
             "description": "Checks the global task queue for pending tasks. The network responds with the task at the head of the queue or None.",
-            "targetProperty": "Current-Task" 
+            "targetProperty": "Current_Task" 
              
         },
         {
             "@type": "CheckTask (grounded)",
             "@id": "Check pending robot task",
             "description": "Checks if this root has accepted a task from the Queue",
-            "checks": "Current-Task.taskId() != None",
-            "satisfiedAction": "set(Delivery-Location.AbsoluteDeliveryLocation = Current-Task.taskDescription.Location) && evaluate(Chansey move goal)"
+            "checks": "Current_Task.taskId() != None",
+            "satisfiedAction": "set(Delivery_Location.TargetRoom = Current_Task.taskDescription.Location) && evaluate(Chansey move goal)"
         }  
     
     ],
@@ -267,7 +275,7 @@
         "@type": "MM:Goal",
         "description": "Move to desired room",
         "desired result": {
-            "condition": "Chansey.Current-Position == Delivery-Location.AbsoluteDeliveryLocation"
+            "condition": "Chansey.Current_Position.x == Delivery_Location.TargetRoom.position.x && Chansey.Current_Position.y == Delivery_Location.TargetRoom.position.y && Chansey.Current_Position.z == Delivery_location.targetRoom.level"
         },
         "action plan": {
             "@id": "Plan Selector"
@@ -276,7 +284,7 @@
     "planSelector": {
         "@id": "Plan Selector",
         "@type": "MM:ActionPlanSelector",
-        "condition": "Delivery-Location.Steps.sameFloorDistance == 0",
+        "condition": "Delivery_Location.Steps.sameFloorDistance == 0",
         "satisfiedActionPlan": {
             "@id": "Chansey simple action plan"
         },
@@ -287,9 +295,17 @@
     "chanseySimpleActionPlan": {
         "@id": "Chansey simple action plan",
         "@type": "MM:ActionPlan",
+        "@description": "the move and rotate steps as calculated by the IndoorNavigationModule needed to reach a position", 
         "actionPlan": [
             {
-                "@id": "Move(distance = Delivery_Location.Steps.sameFloorDistance"
+                "@id": "Move(distance = x)",
+                "succes": "goto(next)",
+                "fail": "Send Task Status"
+            },
+            {
+                "@id": "Rotate(angle = a)",
+                "succes": "goto(next)",
+                "fail": "Send Task Status"
             }
         ],
         "currentAction": "tbd"
@@ -299,7 +315,10 @@
         "@type": "MM:ActionPlan",
         "actionPlan": [
             {
-                "@id": "Move(distance = Delivery_Location.Steps.toElevator)",
+                "@id": "Chansey simple plan to elevator",
+                "@type": "MM:ActionPlan",
+                "@description": "the move and rotate steps as calculated by the IndoorNavigationModule needed to reach the elevator",
+                "actionPlan": [ "..." ],
                 "success": "goto(next)",
                 "fail": "Send Task Status"
             },
