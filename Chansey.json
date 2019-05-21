@@ -175,10 +175,7 @@
         "@id": "Current_Position",
         "@value": {
             "@id": "Timestamp",
-            "x": "x",
-            "y": "y",
-            "z": "z",
-            "o": "o"
+            "p":"p"
         }
     },
     "deliveryLocation": {
