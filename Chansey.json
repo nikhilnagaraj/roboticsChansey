@@ -102,7 +102,8 @@
         {
             "@type": "https://www.mazemap.com/indoor-wayfinding",
             "@id": "IndoorNavigationModule",
-            "description": "A module that calculates a simple action plan of move- and rotate-steps a robot needs to make in order to move from position A to destination B given a reference map of the current floor the robot is on."
+            "description": "A module that calculates a simple action plan of move- and rotate-steps a robot needs to make in order to move from position A to destination B given a reference map of the current floor the robot is on.",
+            "generatedPlan": ""
         },
         {
             "@type": "MM:User_Input_Device",
@@ -193,12 +194,8 @@
                 "position": "p"
             },
             {
-                "@id": "Steps",
-                "heightDifference": " +/- n where n is the number of floors to move up/down.",
-                "toElevator": " +/- n where n is the number of meters to move to the left or right to reach the elevator",
-                "fromElevator": " +/- n where n is the number of meters to move to the left or right to reach the destination from the elevator",
-                "intoElevator": 2,
-                "sameFloorDistance": "+/- n where n is the distance of the destination to the left/right on the same floor"
+                "@id": "Plan",
+                "generatedPlan": "IndoorNavigationModule.getGeneratedPlan()"
             }
         ]
     },
@@ -275,40 +272,11 @@
         "@type": "MM:Goal",
         "description": "Move to desired room",
         "desired result": {
-            "condition": "Chansey.Current_Position.x == Delivery_Location.TargetRoom.position.x && Chansey.Current_Position.y == Delivery_Location.TargetRoom.position.y && Chansey.Current_Position.z == Delivery_location.targetRoom.level"
+            "condition": "Chansey.Current_Position == Delivery_Location.TargetRoom.position"
         },
         "action plan": {
-            "@id": "Plan Selector"
-        }
-    },
-    "planSelector": {
-        "@id": "Plan Selector",
-        "@type": "MM:ActionPlanSelector",
-        "condition": "Delivery_Location.Steps.sameFloorDistance == 0",
-        "satisfiedActionPlan": {
-            "@id": "Chansey simple action plan"
-        },
-        "falsifiedActionPlan": {
             "@id": "Chansey action plan"
         }
-    },
-    "chanseySimpleActionPlan": {
-        "@id": "Chansey simple action plan",
-        "@type": "MM:ActionPlan",
-        "@description": "the move and rotate steps as calculated by the IndoorNavigationModule needed to reach a position", 
-        "actionPlan": [
-            {
-                "@id": "Move(distance = x)",
-                "succes": "goto(next)",
-                "fail": "Send Task Status"
-            },
-            {
-                "@id": "Rotate(angle = a)",
-                "succes": "goto(next)",
-                "fail": "Send Task Status"
-            }
-        ],
-        "currentAction": "tbd"
     },
     "chanseyActionPlan": {
         "@id": "Chansey action plan",
@@ -317,34 +285,9 @@
             {
                 "@id": "Chansey simple plan to elevator",
                 "@type": "MM:ActionPlan",
-                "@description": "the move and rotate steps as calculated by the IndoorNavigationModule needed to reach the elevator",
+                "@description": "the steps as calculated by the IndoorNavigationModule needed to reach the elevator",
                 "actionPlan": [ "..." ],
-                "success": "goto(next)",
-                "fail": "Send Task Status"
-            },
-            {
-                "@id": "Request Elevator",
-                "success": "goto(next)",
-                "fail": "Send Task Status"
-            },
-            {
-                "@id": "Move(distance = Delivery_Location.Steps.intoElevator)",
-                "success": "goto(next)",
-                "fail": "Send Task Status"
-            },
-            {
-                "@id": "Move Elevator(numFloorstoMove = heightDifference)",
-                "success": "goto(next)",
-                "fail": "Send Task Status"
-            },
-            {
-                "@id": "Rotate(angle = 180)",
-                "success": "goto(next)",
-                "fail": "Send Task Status"
-            },
-            {
-                "@id": "Move(distance = Delivery_Location.Steps.fromElevator)",
-                "success": "Send Task Status",
+                "success": "Reply success",
                 "fail": "Send Task Status"
             }
         ],
