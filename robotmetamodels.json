@@ -142,9 +142,7 @@
                     "description": "The position of the object / robot of interest",
                     "subclass": [],
                     "superclass": [],
-                    "required": [
-                        "@value[0].contains(x) && @value[0].contains(y) && @value[0].contains(z) && @value[0].contains(o)"
-                    ]
+                    "required": []
                 },
                 {
                     "@id": "Planar_Position",
@@ -152,7 +150,6 @@
                     "subclass": [],
                     "superclass": [],
                     "required": [
-                        "@value[0].contains(x) && @value[0].contains(y)"
                     ] 
                 },
                 {
@@ -160,9 +157,7 @@
                     "description": "The path that needs to be taken to reach the destination",
                     "subclass": [],
                     "superclass": [],
-                    "required": [
-                        "@value[1].contains(heightDifference) && @value[1].contains(toElevator) && @value[1].contains(fromElevator) && @value[1].contains(intoElevator)"
-                    ]
+                    "required": []
                 },
                 {
                     "@id": "Task",
@@ -237,18 +232,6 @@
                         "descr",
                         "res",
                         "tp"
-                    ]
-                },
-                {
-                    "@id": "ActionPlanSelector",
-                    "description": "Select a plan based on a condition",
-                    "condition": "cndn",
-                    "satisfiedActionPlan": "plan",
-                    "falsifiedActionPlan": "plan2",
-                    "required": [
-                        "cndn",
-                        "plan",
-                        "plan2"
                     ]
                 },
                 {

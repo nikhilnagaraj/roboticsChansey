@@ -17,8 +17,7 @@
                 "position": {
                     "@type": "MM:Planar_Position",
                     "@value": {
-                        "x": 10,
-                        "y": 10
+                        "p": "p"
                     }
                 }
             },
@@ -29,8 +28,7 @@
                 "position": {
                     "@type": "MM:Planar_Position",
                     "@value": {
-                        "x": 10,
-                        "y": -10
+                        "p": "p"
                     }
                 }
             },
@@ -41,8 +39,7 @@
                 "position": {
                     "@type": "MM:Planar_Position",
                     "@value": {
-                        "x": 30,
-                        "y": 10
+                        "p": "p"
                     }
                 }
             },
@@ -53,8 +50,7 @@
                 "position": {
                     "@type": "MM:Planar_Position",
                     "@value": {
-                        "x": 30,
-                        "y": -10
+                        "p": "p"
                     }
                 }
             },
@@ -65,8 +61,7 @@
                 "position": {
                     "@type": "MM:Planar_Position",
                     "@value": {
-                        "x": 10,
-                        "y": 10
+                        "p": "p"
                     }
                 }
             },
@@ -77,8 +72,7 @@
                 "position": {
                     "@type": "MM:Planar_Position",
                     "@value": {
-                        "x": 10,
-                        "y": -10
+                        "p": "p"
                     }
                 }
             },
@@ -89,8 +83,7 @@
                 "position": {
                     "@type": "MM:Planar_Position",
                     "@value": {
-                        "x": 10,
-                        "y": 10
+                        "p": "p"
                     }
                 }
             },
@@ -101,8 +94,7 @@
                 "position": {
                     "@type": "MM:Planar_Position",
                     "@value": {
-                        "x": 70,
-                        "y": 10
+                        "p": "p"
                     }
                 }
             },
@@ -140,8 +132,7 @@
                     "@id": "Human_Elevator_Access_Position",
                     "description": "The position at which someone can wait for the elevator",
                     "@value": {
-                        "x": "x",
-                        "y": "y"
+                        "p": "p"
                     }
                 },
                 "inPosition": {
@@ -149,8 +140,7 @@
                     "@id": "Human_Elevator_In_Position",
                     "description": "The position in the elevator",
                     "@value": {
-                        "x": "x",
-                        "y": "y"
+                        "p": "p"
                     }
                 }
             },
@@ -173,8 +163,7 @@
                     "@id": "Robot_Elevator_Access_Position",
                     "description": "The position at which someone can wait for the elevator",
                     "@value": {
-                        "x": "x",
-                        "y": "y"
+                        "p": "p"
                     }
                 },
                 "inPosition": {
@@ -182,8 +171,7 @@
                     "@id": "Robot_Elevator_In_Position",
                     "description": "The position in the elevator",
                     "@value": {
-                        "x": "x",
-                        "y": "y"
+                        "p": "p"
                     }
                 }
             }
